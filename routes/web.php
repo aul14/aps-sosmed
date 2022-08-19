@@ -24,9 +24,9 @@ Route::get('/', function () {
 
 Route::get('/dashboard', TimelineController::class)->middleware(['auth'])->name('dashboard');
 
-Route::post('post', StorePostController::class)->name('post.store');
-Route::get('post/{post}', ShowPostController::class)->name('post.show');
-Route::post('post/{post}/comment', StoreCommentController::class)->name('post.comment.store');
-Route::delete('post/{post}/comment/{comment}', DeleteCommentController::class)->name('post.comment.destroy');
+Route::post('post', StorePostController::class)->middleware(['auth'])->name('post.store');
+Route::get('post/{post}', ShowPostController::class)->middleware(['auth'])->name('post.show');
+Route::post('post/{post}/comment', StoreCommentController::class)->middleware(['auth'])->name('post.comment.store');
+Route::delete('post/{post}/comment/{comment}', DeleteCommentController::class)->middleware(['auth'])->name('post.comment.destroy');
 
 require __DIR__ . '/auth.php';
