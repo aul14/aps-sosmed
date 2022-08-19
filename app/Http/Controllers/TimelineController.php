@@ -16,7 +16,8 @@ class TimelineController extends Controller
     public function __invoke(Request $request)
     {
         return view('dashboard', [
-            'posts' => Post::with('user')->latest('id')->get()
+            // 'posts' => Post::with('user', 'comments')->latest('id')->get()
+            'posts' => Post::with('user')->withCount('comments')->latest('id')->get()
         ]);
     }
 }
