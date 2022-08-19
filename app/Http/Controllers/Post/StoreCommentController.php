@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Post;
 
 use App\Http\Controllers\Controller;
 use App\Models\Post;
+use App\Notifications\PostCommented;
 use Illuminate\Http\Request;
 
 class StoreCommentController extends Controller
@@ -22,7 +23,9 @@ class StoreCommentController extends Controller
 
         $data['user_id'] = $request->user()->id;
 
-        $post->comments()->create($data);
+        $comment = $post->comments()->create($data);
+
+        $post->user->notify(new PostCommented($comment));
 
         return redirect()->back()->with('success', 'Commend added has been successfully');
     }
