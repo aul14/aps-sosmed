@@ -35,8 +35,16 @@
             @foreach ($post->comments as $comment)
                 <div class="card w-full bg-base-100 shadow-xl my-3">
                     <div class="card-body">
-                        <h2 class="card-title">{{ ucwords($comment->user->name) }} - <span
-                                class="text-gray-500">{{ $comment->created_at->diffForHumans() }}</span></h2>
+                        <h2 class="card-title">{{ ucwords($comment->user->name) }} -
+                            <span class="text-gray-500">{{ $comment->created_at->diffForHumans() }}</span>
+                            <span class="text-right"></span>
+                            <form action="{{ route('post.comment.destroy', [$comment->post, $comment]) }}"
+                                method="post">
+                                @csrf
+                                @method('DELETE')
+                                <input type="submit" value="Delete" class="btn btn-error btn-sm text-white">
+                            </form>
+                        </h2>
                         <p>{{ $comment->body }}</p>
                     </div>
                 </div>

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Post\DeleteCommentController;
 use App\Http\Controllers\Post\StoreCommentController;
 use App\Http\Controllers\Post\StorePostController;
 use App\Http\Controllers\ShowPostController;
@@ -26,5 +27,6 @@ Route::get('/dashboard', TimelineController::class)->middleware(['auth'])->name(
 Route::post('post', StorePostController::class)->name('post.store');
 Route::get('post/{post}', ShowPostController::class)->name('post.show');
 Route::post('post/{post}/comment', StoreCommentController::class)->name('post.comment.store');
+Route::delete('post/{post}/comment/{comment}', DeleteCommentController::class)->name('post.comment.destroy');
 
 require __DIR__ . '/auth.php';
